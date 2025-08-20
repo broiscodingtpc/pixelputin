@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Pixel Putin</title>
+
+    <!-- Tailwind via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      /* Fallback in case Tailwind fails to load */
+      body{background:#090616;color:#fff;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono",monospace}
+      .code-panel{border:1px solid rgba(255,255,255,.12);background:rgba(0,0,0,.7);border-radius:12px}
+    </style>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: { mono: ["ui-monospace", "SFMono-Regular", "Menlo", "Monaco", "Consolas", "Liberation Mono", "monospace"] },
+          },
+        },
+      };
+    </script>
+
+    <!-- Favicon optional -->
+    <link rel="icon" href="./public/pixel-putin.png" />
+  </head>
+  <body class="bg-[#090616]">
+    <div id="root"></div>
+    <div id="boot" style="position:fixed;left:12px;bottom:12px;color:#fff;font:12px monospace;opacity:.7;z-index:9999">Loading app…</div>
+
+    <!-- React via CDN -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <!-- App: fetch + compile JSX explicitly -->
+    <script>
+      (function loadApp(){
+        function compileAndEval(source){
+          try {
+            const compiled = Babel.transform(source, { presets: [["react", { runtime: "classic" }]] }).code;
+            eval(compiled);
+          } catch (e) {
+            console.error("Babel compile error:", e);
+          }
+        }
+        fetch('./pixel_putin_one_page_website_react.jsx').then(r=>r.text()).then(compileAndEval).catch(err=>{
+          console.error('Failed to load app source', err);
+        });
+      })();
+    </script>
+    <script>
+      (function mount() {
+        var boot = document.getElementById('boot');
+        if (window.PixelPutinSite && window.ReactDOM && document.getElementById('root')) {
+          try {
+            const root = ReactDOM.createRoot(document.getElementById('root'));
+            root.render(React.createElement(window.PixelPutinSite));
+            if (boot) boot.textContent = 'App mounted';
+            setTimeout(function(){ if (boot) boot.remove(); }, 800);
+          } catch (e) {
+            if (boot) boot.textContent = 'Mount error: ' + (e && e.message ? e.message : e);
+          }
+        } else {
+          if (boot) boot.textContent = 'Waiting for scripts…';
+          setTimeout(mount, 60);
+        }
+      })();
+      window.addEventListener('error', function (e) {
+        var boot = document.getElementById('boot');
+        if (boot) boot.textContent = 'Runtime error: ' + e.message;
+      });
+    </script>
+  </body>
+  </html>
+
+
