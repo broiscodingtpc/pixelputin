@@ -351,22 +351,34 @@ function Faq({ items }) {
 
 // Pixelated digital art background
 function PixelArtBackground() {
+  const [isSmall, setIsSmall] = React.useState(false);
+  React.useEffect(() => {
+    const update = () => {
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+      setIsSmall(w <= 640 || h > w);
+    };
+    update();
+    window.addEventListener('resize', update);
+    return () => window.removeEventListener('resize', update);
+  }, []);
+
+  const containerStyle = isSmall ? { bottom: 'auto', height: '100vh' } : undefined;
+  const bgStyle = {
+    backgroundImage: `url(${BACKGROUND_IMG_SRC})`,
+    backgroundSize: isSmall ? 'contain' : 'cover',
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat',
+    backgroundAttachment: isSmall ? 'scroll' : 'fixed',
+    imageRendering: 'pixelated',
+    opacity: 0.6,
+    filter: 'brightness(1.08) contrast(1.06)'
+  };
+
   return (
-    <div className="absolute inset-0 z-0 pointer-events-none">
+    <div className="absolute inset-0 z-0 pointer-events-none" style={containerStyle}>
       {/* Full-screen background image from public */}
-      <div
-        className="absolute inset-0"
-        style={{
-          backgroundImage: `url(${BACKGROUND_IMG_SRC})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
-          backgroundAttachment: 'fixed',
-          imageRendering: 'pixelated',
-          opacity: 0.6,
-          filter: 'brightness(1.08) contrast(1.06)'
-        }}
-      />
+      <div className="absolute inset-0" style={bgStyle} />
       {/* Base pixel grid */}
       <div className="absolute inset-0 opacity-25 [background-image:repeating-linear-gradient(0deg,rgba(255,255,255,.05)_0_1px,transparent_1px_8px),repeating-linear-gradient(90deg,rgba(255,255,255,.05)_0_1px,transparent_1px_8px)] [image-rendering:pixelated]" />
 
