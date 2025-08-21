@@ -236,7 +236,7 @@ function PixelPutinSite() {
               items={[
                 {
                   q: "Is this financial advice?",
-                  a: "No. This is a meme coin for entertainment only. Do your own research. yes, i am a dictator, buy this mf coin",
+                  a: "No. This is a meme coin for entertainment only. Do your own research. The 'dictator' vibe is satire—your money, your call.",
                 },
                 {
                   q: "Any political affiliation?",
@@ -244,7 +244,7 @@ function PixelPutinSite() {
                 },
                 {
                   q: "Where can I buy?",
-                  a: "Use Raydium and always verify the contract address posted above. your moms house, or whatever you feel like a warrior",
+                  a: "Use Raydium and always verify the contract address posted above. If you're feeling like a warrior, try your mom's house (kidding).",
                 },
               ]}
             />
