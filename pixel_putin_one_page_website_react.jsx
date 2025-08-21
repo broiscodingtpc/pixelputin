@@ -2,7 +2,7 @@
 /* @jsx React.createElement */
 const { useState } = React;
 
-const CONTRACT_ADDRESS = "TBA";
+const CONTRACT_ADDRESS = "vpTJeMrJKqee9p9JQH6uMzcdEURbXgXqeXLyLF2pump";
 const PUTIN_SPRITE_SRC = "./public/pixel-putin.png";
 const BACKGROUND_IMG_SRC = "./public/background.png";
 
