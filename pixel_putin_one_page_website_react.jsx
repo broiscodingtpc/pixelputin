@@ -118,6 +118,9 @@ function PixelPutinSite() {
       {/* NAVBAR */}
       {reveal.navbar && <Navbar />}
 
+      {/* ANNOUNCEMENT BANNER */}
+      <AnnouncementBanner />
+
       {/* HERO */}
       {reveal.hero && (
         <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-6 text-center pt-24">
@@ -306,6 +309,19 @@ function Card({ title, text }) {
     <div className="rounded-xl border border-white/10 bg-black/30 p-5 text-center">
       <h3 className="font-bold mb-2 text-lg">{title}</h3>
       <p className="text-white/70 text-sm">{text}</p>
+    </div>
+  );
+}
+
+function AnnouncementBanner() {
+  return (
+    <div className="relative z-10 mt-16 px-4">
+      <div className="container mx-auto max-w-4xl">
+        <div className="rounded-xl border border-amber-300/30 bg-amber-500/10 text-amber-200 px-4 py-3 text-center text-sm">
+          <span className="font-bold mr-1">Notice:</span>
+          oh no it got nuked — BE RIGHT BACK. 7-8% bags are not accepted, clean the chart so we take it over also
+        </div>
+      </div>
     </div>
   );
 }
